@@ -1,91 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(to bottom right, #b3e5fc, #f8bbd0);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Pacifico', cursive;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-size: 3em;
-      color: #ff4081;
-      margin-bottom: 20px;
-      animation: floatText 2.5s ease-in-out infinite;
-      z-index: 2;
-    }
-
-    @keyframes floatText {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-
-    .cake-img {
-      width: 220px;
-      animation: popUp 1.5s ease-out forwards;
-      z-index: 1;
-    }
-
-    @keyframes popUp {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pop-up</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <canvas id="confetti-canvas"></canvas>
+    <div class="container">
+        <h1>คลิกที่นี่เพื่อเปิดคำอวยพรพิเศษ!</h1>
+        <button id="openPopupBtn">เปิดคำอวยพร</button>
+    </div>
 
-  <h1>Happy Birthday, Lek!</h1>
-  <img src="https://i.ibb.co/zX4pcyS/cake.png" alt="cake" class="cake-img" />
+    <div id="birthdayPopup" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script>
-    const duration = 5 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+            <div class="record-player-gimmick">
+                <div class="turntable-base"></div>
+                <div class="platter"></div>
+                <div class="record"></div>
+                <div class="tone-arm-base"></div>
+                <div class="tone-arm"></div>
+                <div class="needle"></div>
+            </div>
 
-    function randomInRange(min, max) {
-      return Math.random() * (max - min) + min;
-    }
+            <p class="greeting-main">Happy Birthday!</p>
+            <p class="greeting-sub">ขอให้เป็นวันที่เต็มไปด้วยความสุข<br>และเสียงเพลงที่ไพเราะนะคะ/นะครับ</p>
+        </div>
+    </div>
 
-    const interval = setInterval(function() {
-      const timeLeft = animationEnd - Date.now();
+    <script>
+        const openPopupBtn = document.getElementById('openPopupBtn');
+        const birthdayPopup = document.getElementById('birthdayPopup');
+        const closeBtn = document.querySelector('.close-btn');
 
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
+        openPopupBtn.addEventListener('click', () => {
+            birthdayPopup.style.display = 'flex'; // แสดง Pop-up
+        });
 
-      const particleCount = 50 * (timeLeft / duration);
+        closeBtn.addEventListener('click', () => {
+            birthdayPopup.style.display = 'none'; // ซ่อน Pop-up
+        });
 
-      confetti(Object.assign({}, defaults, {
-        particleCount,
-        origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 }
-      }));
-    }, 250);
-  </script>
+        // ซ่อน Pop-up เมื่อคลิกนอกพื้นที่ Pop-up
+        birthdayPopup.addEventListener('click', (event) => {
+            if (event.target === birthdayPopup) {
+                birthdayPopup.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 </html>
