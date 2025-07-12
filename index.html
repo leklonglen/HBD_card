@@ -37,12 +37,29 @@
         const birthdayPopup = document.getElementById('birthdayPopup');
         const closeBtn = document.querySelector('.close-btn');
 
-        openPopupBtn.addEventListener('click', () => {
-            birthdayPopup.style.display = 'flex'; // แสดง Pop-up
+       openPopupBtn.addEventListener('click', () => {
+            birthdayPopup.style.display = 'flex'; // ทำให้ Pop-up แสดงผล
+            // เพิ่ม class 'show' เพื่อเรียกใช้ animation
+            setTimeout(() => { // ใช้ setTimeout เพื่อให้แน่ใจว่า display:flex ทำงานก่อน
+                birthdayPopup.classList.add('show');
+            }, 10); // หน่วงเวลาเล็กน้อย
         });
 
         closeBtn.addEventListener('click', () => {
-            birthdayPopup.style.display = 'none'; // ซ่อน Pop-up
+            birthdayPopup.classList.remove('show'); // นำ class 'show' ออก
+            setTimeout(() => { // หน่วงเวลาให้ animation เล่นจบก่อนซ่อน
+                birthdayPopup.style.display = 'none';
+            }, 300); // 300ms เท่ากับ duration ของ animation
+        });
+
+        // ซ่อน Pop-up เมื่อคลิกนอกพื้นที่ Pop-up
+        birthdayPopup.addEventListener('click', (event) => {
+            if (event.target === birthdayPopup) {
+                birthdayPopup.classList.remove('show'); // นำ class 'show' ออก
+                setTimeout(() => { // หน่วงเวลาให้ animation เล่นจบก่อนซ่อน
+                    birthdayPopup.style.display = 'none';
+                }, 300); // 300ms เท่ากับ duration ของ animation
+            }
         });
 
         // ซ่อน Pop-up เมื่อคลิกนอกพื้นที่ Pop-up
