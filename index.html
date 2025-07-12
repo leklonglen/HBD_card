@@ -8,17 +8,22 @@
   <style>
     body {
       margin: 0;
-      background: linear-gradient(to bottom, #ffe6f0, #fff5fb);
-      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #b3e5fc, #f8bbd0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       font-family: 'Pacifico', cursive;
-      text-align: center;
+      overflow: hidden;
     }
 
     h1 {
       font-size: 3em;
-      color: #ff69b4;
-      margin-top: 50px;
-      animation: floatText 3s ease-in-out infinite;
+      color: #ff4081;
+      margin-bottom: 20px;
+      animation: floatText 2.5s ease-in-out infinite;
+      z-index: 2;
     }
 
     @keyframes floatText {
@@ -27,136 +32,60 @@
       100% { transform: translateY(0); }
     }
 
-    .cake {
-      position: relative;
-      width: 200px;
-      margin: 50px auto;
+    .cake-img {
+      width: 220px;
+      animation: popUp 1.5s ease-out forwards;
+      z-index: 1;
     }
 
-    .layer {
-      width: 200px;
-      height: 40px;
-      background: #ff99cc;
-      border-radius: 10px;
-      margin: 0 auto;
-      position: relative;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    }
-
-    .layer:nth-child(2) {
-      width: 150px;
-      background: #ff66b2;
-      top: -10px;
-    }
-
-    .layer:nth-child(3) {
-      width: 100px;
-      background: #ff3399;
-      top: -20px;
-    }
-
-    .candle {
-      width: 10px;
-      height: 30px;
-      background: #fff;
-      margin: 0 auto;
-      position: relative;
-      top: -30px;
-      border-radius: 2px;
-    }
-
-    .flame {
-      width: 14px;
-      height: 14px;
-      background: gold;
-      border-radius: 50%;
-      position: absolute;
-      top: -18px;
-      left: -2px;
-      animation: flicker 0.3s infinite alternate;
-    }
-
-    @keyframes flicker {
-      from { transform: scale(1); opacity: 1; }
-      to { transform: scale(1.2); opacity: 0.6; }
+    @keyframes popUp {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     canvas {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-    }
-
-    .message {
-      color: #d63384;
-      font-size: 1.8em;
-      margin-top: 20px;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
-  <canvas id="confetti"></canvas>
-  <h1>Happy Birthday!</h1>
 
-  <div class="cake">
-    <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="candle">
-      <div class="flame"></div>
-    </div>
-  </div>
+  <canvas id="confetti-canvas"></canvas>
 
-  <div class="message">ขอให้คุณมีความสุขมาก ๆ นะ 🎂🎈</div>
+  <h1>Happy Birthday, Lek!</h1>
+  <img src="https://i.ibb.co/zX4pcyS/cake.png" alt="cake" class="cake-img" />
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
-    // Confetti script
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const duration = 5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-    const confetti = Array.from({length: 150}, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height,
-      r: Math.random() * 6 + 4,
-      d: Math.random() * 50 + 50,
-      color: `hsl(${Math.random() * 360}, 100%, 70%)`,
-      tilt: Math.random() * 10 - 10,
-      tiltAngle: 0,
-      tiltAngleIncrement: Math.random() * 0.1 + 0.05
-    }));
-
-    function drawConfetti() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      confetti.forEach(c => {
-        ctx.beginPath();
-        ctx.lineWidth = c.r / 2;
-        ctx.strokeStyle = c.color;
-        ctx.moveTo(c.x + c.tilt + c.r / 4, c.y);
-        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r);
-        ctx.stroke();
-      });
-      updateConfetti();
-      requestAnimationFrame(drawConfetti);
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
     }
 
-    function updateConfetti() {
-      confetti.forEach(c => {
-        c.y += Math.cos(c.d / 10) + 1 + c.r / 2;
-        c.tiltAngle += c.tiltAngleIncrement;
-        c.tilt = Math.sin(c.tiltAngle) * 10;
+    const interval = setInterval(function() {
+      const timeLeft = animationEnd - Date.now();
 
-        if (c.y > canvas.height) {
-          c.y = -10;
-          c.x = Math.random() * canvas.width;
-        }
-      });
-    }
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
 
-    drawConfetti();
+      const particleCount = 50 * (timeLeft / duration);
+
+      confetti(Object.assign({}, defaults, {
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 }
+      }));
+    }, 250);
   </script>
+
 </body>
 </html>
