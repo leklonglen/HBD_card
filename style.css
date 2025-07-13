@@ -181,6 +181,7 @@ height: 70px;
 }
 
 /* สไตล์สำหรับสัญลักษณ์สามเหลี่ยม */
+/*
 .record-marker {
     position: absolute;
     top: 50%; /* เลื่อนลงมากลางแนวดิ่ง */
@@ -193,7 +194,7 @@ height: 70px;
     border-bottom: 12px solid white; /* สร้างฐานของสามเหลี่ยมสีขาว */
     z-index: 2; /* ให้ marker อยู่บนแผ่นเสียง */
 }
-
+*/
 /* Keyframes สำหรับการหมุน */
 @keyframes spin {
     from { transform: rotate(0deg); }
