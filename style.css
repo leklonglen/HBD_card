@@ -181,20 +181,20 @@ height: 70px;
 }
 
 /* สไตล์สำหรับสัญลักษณ์สามเหลี่ยม */
-/*
-.record-marker {
-    position: absolute;
-    top: 50%; /* เลื่อนลงมากลางแนวดิ่ง */
-    left: 50%; /* เลื่อนมากลางแนวราบ */
-    transform: translate(-50%, -50%); /* ปรับตำแหน่งให้กึ่งกลางเป๊ะ */
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent; /* สร้างด้านซ้ายของสามเหลี่ยม */
-    border-right: 8px solid transparent; /* สร้างด้านขวาของสามเหลี่ยม */
-    border-bottom: 12px solid white; /* สร้างฐานของสามเหลี่ยมสีขาว */
-    z-index: 2; /* ให้ marker อยู่บนแผ่นเสียง */
-}
-*/
+
+/*.record-marker {*/
+    /*position: absolute;*/
+    /*top: 50%; /* เลื่อนลงมากลางแนวดิ่ง */*/
+    /*left: 50%; /* เลื่อนมากลางแนวราบ */*/
+    /*transform: translate(-50%, -50%); /* ปรับตำแหน่งให้กึ่งกลางเป๊ะ */*/
+    /*width: 0;*/
+    /*height: 0;*/
+    /*border-left: 8px solid transparent; /* สร้างด้านซ้ายของสามเหลี่ยม */*/
+    /*border-right: 8px solid transparent; /* สร้างด้านขวาของสามเหลี่ยม */*/
+    /*border-bottom: 12px solid white; /* สร้างฐานของสามเหลี่ยมสีขาว */*/
+    /*z-index: 2; /* ให้ marker อยู่บนแผ่นเสียง */*/
+/*}*/
+
 /* Keyframes สำหรับการหมุน */
 @keyframes spin {
     from { transform: rotate(0deg); }
