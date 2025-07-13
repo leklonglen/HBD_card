@@ -99,11 +99,11 @@ body {
 }
 .greeting-name {
     font-family: 'Playfair Display', serif; /* ฟอนต์สำหรับ Happy Birthday */
-    font-size: 2em; /* ขนาดตัวอักษรใหญ่ขึ้น */
-    color: #8b4513; /* สีน้ำตาลเข้ม */
-    margin-bottom: 10px;
+    font-size: 1.6em; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    color: #a0522d; /* สีน้ำตาลเดียวกับปุ่ม */
+    margin-top: 20px;
     line-height: 1.2;
-    font-weight: 700; /* ทำให้ตัวหนาขึ้น */
+    font-weight: 600; /* ทำให้ตัวหนาขึ้น */
 }
 
 .greeting-sub {
