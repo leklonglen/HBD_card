@@ -152,9 +152,10 @@ body {
 
 /* สไตล์สำหรับแผ่นเสียง (Record) */
 .record {
-    width: 70px;
-    height: 70px;
-    background-color: #1a1a1a; /* สีดำของแผ่นเสียง */
+width: 70px;
+height: 70px;
+/* Remove the solid background color */
+    background-color: #1a1a1a; 
     border-radius: 50%;
     position: absolute;
     top: 25px; /* ปรับให้พอดีกับ platter */
@@ -163,7 +164,12 @@ body {
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
     transform-origin: center center; /* จุดหมุนอยู่ตรงกลาง */
     position: relative; /* กำหนดให้เป็น relative เพื่อให้ record-marker จัดตำแหน่งได้ */
-    overflow: hidden; /* ซ่อนส่วนเกินของสามเหลี่ยม */
+    overflow: hidden; /* ซ่อนส่วนเกิน */
+    /* Add the background image */
+    background-image: url('record_image.png'); /* เปลี่ยน 'record_image.png' เป็นชื่อไฟล์ของคุณ */
+    background-size: cover; /* ให้รูปภาพเต็มพื้นที่ */
+    background-position: center; /* จัดกึ่งกลางรูปภาพ */
+    background-repeat: no-repeat; /* ไม่ให้รูปภาพทำซ้ำ */
 }
 
 /* สไตล์สำหรับสัญลักษณ์สามเหลี่ยม */
