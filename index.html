@@ -28,7 +28,10 @@
             </div>
 
             <p class="greeting-main">Happy Birthday!</p>
-            <p class="greeting-sub">ขอให้เป็นวันที่เต็มไปด้วยความสุข<br>และเสียงเพลงที่ไพเราะนะคะ/นะครับ</p>
+            <p class="greeting-sub">ขอให้เป็นวันที่เต็มไปด้วยความสุข<br>และเสียงเพลงที่ไพเราะนะครับ</p>
+
+            <audio id="birthdaySong" src="happy_birthday.mp3" preload="auto" loop></audio>
+
         </div>
     </div>
 
@@ -36,36 +39,40 @@
         const openPopupBtn = document.getElementById('openPopupBtn');
         const birthdayPopup = document.getElementById('birthdayPopup');
         const closeBtn = document.querySelector('.close-btn');
+        const recordElement = document.querySelector('.record'); // เลือก element แผ่นเสียง
+        const birthdaySong = document.getElementById('birthdaySong'); // เลือก element เพลง
 
-       openPopupBtn.addEventListener('click', () => {
+        // ฟังก์ชันสำหรับเปิด Pop-up
+        openPopupBtn.addEventListener('click', () => {
             birthdayPopup.style.display = 'flex'; // ทำให้ Pop-up แสดงผล
-            // เพิ่ม class 'show' เพื่อเรียกใช้ animation
-            setTimeout(() => { // ใช้ setTimeout เพื่อให้แน่ใจว่า display:flex ทำงานก่อน
+            setTimeout(() => {
                 birthdayPopup.classList.add('show');
-            }, 10); // หน่วงเวลาเล็กน้อย
+                recordElement.classList.add('spinning'); // เพิ่ม class 'spinning' ให้แผ่นเสียง
+                birthdaySong.play().catch(error => { // เล่นเพลง
+                    console.error("Autoplay prevented:", error);
+                    // หาก autoplay ไม่ได้ผล อาจต้องแจ้งผู้ใช้ให้คลิกเพื่อเล่นเพลง
+                });
+            }, 10);
         });
 
-        closeBtn.addEventListener('click', () => {
-            birthdayPopup.classList.remove('show'); // นำ class 'show' ออก
-            setTimeout(() => { // หน่วงเวลาให้ animation เล่นจบก่อนซ่อน
+        // ฟังก์ชันสำหรับปิด Pop-up
+        const closePopup = () => {
+            birthdayPopup.classList.remove('show'); // นำ class 'show' ออกเพื่อเล่น animation ปิด
+            recordElement.classList.remove('spinning'); // หยุดหมุนแผ่นเสียง
+            birthdaySong.pause(); // หยุดเพลง
+            birthdaySong.currentTime = 0; // รีเซ็ตเพลงกลับไปเริ่มต้น
+
+            setTimeout(() => {
                 birthdayPopup.style.display = 'none';
-            }, 300); // 300ms เท่ากับ duration ของ animation
-        });
+            }, 300); // 300ms เท่ากับ duration ของ animation fadeOut
+        };
+
+        closeBtn.addEventListener('click', closePopup);
 
         // ซ่อน Pop-up เมื่อคลิกนอกพื้นที่ Pop-up
         birthdayPopup.addEventListener('click', (event) => {
             if (event.target === birthdayPopup) {
-                birthdayPopup.classList.remove('show'); // นำ class 'show' ออก
-                setTimeout(() => { // หน่วงเวลาให้ animation เล่นจบก่อนซ่อน
-                    birthdayPopup.style.display = 'none';
-                }, 300); // 300ms เท่ากับ duration ของ animation
-            }
-        });
-
-        // ซ่อน Pop-up เมื่อคลิกนอกพื้นที่ Pop-up
-        birthdayPopup.addEventListener('click', (event) => {
-            if (event.target === birthdayPopup) {
-                birthdayPopup.style.display = 'none';
+                closePopup();
             }
         });
     </script>
