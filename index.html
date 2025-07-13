@@ -41,32 +41,31 @@
         const openPopupBtn = document.getElementById('openPopupBtn');
         const birthdayPopup = document.getElementById('birthdayPopup');
         const closeBtn = document.querySelector('.close-btn');
-        const recordElement = document.querySelector('.record'); // เลือก element แผ่นเสียง
-        const birthdaySong = document.getElementById('birthdaySong'); // เลือก element เพลง
+        const recordElement = document.querySelector('.record');
+        const birthdaySong = document.getElementById('birthdaySong');
 
         // ฟังก์ชันสำหรับเปิด Pop-up
         openPopupBtn.addEventListener('click', () => {
-            birthdayPopup.style.display = 'flex'; // ทำให้ Pop-up แสดงผล
+            birthdayPopup.style.display = 'flex';
             setTimeout(() => {
                 birthdayPopup.classList.add('show');
-                recordElement.classList.add('spinning'); // เพิ่ม class 'spinning' ให้แผ่นเสียง
-                birthdaySong.play().catch(error => { // เล่นเพลง
+                recordElement.classList.add('spinning');
+                birthdaySong.play().catch(error => {
                     console.error("Autoplay prevented:", error);
-                    // หาก autoplay ไม่ได้ผล อาจต้องแจ้งผู้ใช้ให้คลิกเพื่อเล่นเพลง
                 });
             }, 10);
         });
 
         // ฟังก์ชันสำหรับปิด Pop-up
         const closePopup = () => {
-            birthdayPopup.classList.remove('show'); // นำ class 'show' ออกเพื่อเล่น animation ปิด
-            recordElement.classList.remove('spinning'); // หยุดหมุนแผ่นเสียง
-            birthdaySong.pause(); // หยุดเพลง
-            birthdaySong.currentTime = 0; // รีเซ็ตเพลงกลับไปเริ่มต้น
+            birthdayPopup.classList.remove('show');
+            recordElement.classList.remove('spinning');
+            birthdaySong.pause();
+            birthdaySong.currentTime = 0;
 
             setTimeout(() => {
                 birthdayPopup.style.display = 'none';
-            }, 300); // 300ms เท่ากับ duration ของ animation fadeOut
+            }, 300);
         };
 
         closeBtn.addEventListener('click', closePopup);
