@@ -1,4 +1,201 @@
-/* ... (โค้ด CSS ส่วนบนเดิมทั้งหมด) ... */
+/* พื้นฐาน & ฟอนต์ */
+body {
+    font-family: 'Prompt', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f8f8; /* สีพื้นหลังหน้าเว็บอ่อนๆ */
+    color: #333;
+}
+
+.container {
+    text-align: center;
+}
+
+#openPopupBtn {
+    padding: 12px 25px;
+    font-size: 18px;
+    background-color: #a0522d; /* สีน้ำตาลเข้มอบอุ่น */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#openPopupBtn:hover {
+    background-color: #8b4513; /* สีเข้มขึ้นเมื่อ Hover */
+}
+
+/* --- Pop-up Styles --- */
+.popup-overlay {
+    display: none; /* ซ่อน Pop-up ไว้ตอนแรก */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* พื้นหลังทึบแสง */
+    display: flex; /* ใช้ flexbox ในการจัดกึ่งกลาง Pop-up */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* ให้ Pop-up อยู่ด้านบนสุด */
+    opacity: 0; /* ซ่อนด้วย opacity เพื่อทำ animation */
+    pointer-events: none; /* ปิดการ interact ก่อน animation */
+    transition: opacity 0.3s ease-out;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popup-content {
+    background-color: #fffaf0; /* สีครีมอ่อนๆ / ขาวนวลสำหรับ Pop-up */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 450px; /* กำหนดความกว้างสูงสุด */
+    width: 90%;
+    position: relative;
+    transform: scale(0.95); /* ทำให้ดูเหมือนย่อลงเล็กน้อย */
+    transition: transform 0.3s ease-out;
+}
+
+.popup-overlay.active .popup-content {
+    transform: scale(1); /* ขยายกลับมาเมื่อ active */
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+    color: #555;
+}
+
+.greeting-main {
+    font-family: 'Playfair Display', serif; /* ฟอนต์สำหรับ Happy Birthday */
+    font-size: 4em; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    color: #8b4513; /* สีน้ำตาลเข้ม */
+    margin-bottom: 10px;
+    line-height: 1.2;
+    font-weight: 700; /* ทำให้ตัวหนาขึ้น */
+}
+
+.greeting-sub {
+    font-family: 'Prompt', sans-serif;
+    font-size: 1.2em;
+    color: #5a4b43; /* สีน้ำตาลเทาๆ */
+    line-height: 1.6;
+    margin-top: 0;
+}
+
+/* --- Record Player Gimmick Styles --- */
+.record-player-gimmick {
+    width: 150px; /* ขนาดโดยรวมของเครื่องเล่น */
+    height: 120px;
+    margin: -10px auto 25px auto; /* ขยับขึ้นและจัดกึ่งกลาง */
+    position: relative;
+    /* overflow: hidden;  เผื่อมีส่วนเกิน */
+    transform: scale(0.9); /* ทำให้เล็กกว่าขนาดจริงนิดหน่อย */
+}
+
+.turntable-base {
+    width: 100%;
+    height: 40px;
+    background-color: #6d4c41; /* สีน้ำตาลของฐาน */
+    border-radius: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.platter {
+    width: 90px;
+    height: 90px;
+    background-color: #333; /* สีดำของจานหมุน */
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.record {
+    width: 70px;
+    height: 70px;
+    background-color: #1a1a1a; /* สีดำของแผ่นเสียง */
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    border: 2px solid #555; /* ขอบแผ่นเสียง */
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.tone-arm-base {
+    width: 25px;
+    height: 25px;
+    background-color: #555; /* สีฐานแขน */
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+    right: 15px;
+    border: 2px solid #444;
+}
+
+.tone-arm {
+    width: 60px;
+    height: 5px;
+    background-color: #a8a8a8; /* สีเงินของแขน */
+    position: absolute;
+    top: 32px; /* ปรับให้พอดีกับฐาน */
+    right: 0px;
+    transform-origin: 0% 50%; /* หมุนจากฐาน */
+    transform: rotate(30deg); /* หมุนให้วางบนแผ่นเสียง */
+    border-radius: 2px;
+}
+
+.needle {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid #b8860b; /* สีทองเหลืองของหัวเข็ม */
+    position: absolute;
+    bottom: -8px; /* วางที่ปลายแขน */
+    left: 55px; /* ปรับตำแหน่งปลายเข็ม */
+    transform: rotate(-30deg); /* หมุนเข็มให้ตั้งตรงกับแขน */
+}
+
+/* เพิ่ม animation ให้ Pop-up ปรากฏขึ้นอย่างนุ่มนวล */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup-overlay.show {
+    display: flex;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
 
 /* --- Record Player Gimmick Styles --- */
 .record-player-gimmick {
