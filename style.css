@@ -139,7 +139,11 @@ body {
 .turntable-base {
     width: 100%;
     height: 40px;
-    background-color: #6d4c41; /* สีน้ำตาลของฐาน */
+    /* #7a5a4a (น้ำตาลอมเทาเข้มขึ้นเล็กน้อย)*/
+    /* #8a7b70 (น้ำตาลเทาอ่อนลง) */
+    /* #5b6d7a (น้ำเงินอมเทาเข้ม) */
+    /* #6d4c41 สีน้ำตาลของฐาน */
+    background-color: #8a7b70; /* สีน้ำตาลของฐาน */
     border-radius: 8px;
     position: absolute;
     bottom: 0;
@@ -150,7 +154,9 @@ body {
 .platter {
     width: 90px;
     height: 90px;
-    background-color: #333; /* สีดำของจานหมุน */
+    /* #333 เป็นสีดำของจานหมุน */
+    /* #2c3e50 (น้ำเงินเข้มมาก คล้ายสีน้ำเงินกรมท่า) */
+    background-color: #4a5c6e; /* เป็นสีน้ำเงินที่เข้มมากจนเกือบดำ ทำให้ดูเป็นเงาของแผ่นเสียงสีน้ำเงิน และยังดูแข็งแรง ของจานหมุน */
     border-radius: 50%;
     position: absolute;
     top: 15px;
