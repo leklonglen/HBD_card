@@ -91,7 +91,15 @@ body {
 
 .greeting-main {
     font-family: 'Playfair Display', serif; /* ฟอนต์สำหรับ Happy Birthday */
-    font-size: 4em; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    font-size: 3em; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    color: #8b4513; /* สีน้ำตาลเข้ม */
+    margin-bottom: 10px;
+    line-height: 1.2;
+    font-weight: 700; /* ทำให้ตัวหนาขึ้น */
+}
+.greeting-name {
+    font-family: 'Playfair Display', serif; /* ฟอนต์สำหรับ Happy Birthday */
+    font-size: 2em; /* ขนาดตัวอักษรใหญ่ขึ้น */
     color: #8b4513; /* สีน้ำตาลเข้ม */
     margin-bottom: 10px;
     line-height: 1.2;
